@@ -98,9 +98,24 @@
         타입은 객체가 담을수 있는 데이터와 그 객체가 수행할 수 있는 연산을 정의
 
         변환은 그 연산중 하나
+        - non-bool arithmetic to bool
+        0은 false, 이외에는 true
+        - bool to arithmetic
+        true : 1, false : 0
+        - floating-point to integral
+        truncated.
+        - integral to floating-point
+        fractional part is 0/ precision may be lost
+        - out-of-range to unsigned
+        modulo the number of values the target type can hold
+        - out-of-range to signed type
+        undefined
 
-
-    
+            #advice : avoid Undefined and implementation-defined behavior
+            assuming that the size of an int is a fixed and known value
+            -> nonportable.
+        
+        
 
 2.2 variables
     variable : making storage fence
