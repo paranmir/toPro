@@ -41,4 +41,8 @@ Use `constexpr` for variables that you *intend to* use as constant expressions.
 - Literal types are simple enough to use in a `constexpr` 
 - `constexpr` objects to initialize **pointers** and **reference** are strictly limited
 	+ can initialize `constexpr` pointer from the `nullptr` or 0.
-	
+	+ can point to an object : remains at a fixed address
+		* ordinarily variables defined inside a function are not fixed.
+		* cover in §6.1.1
+
+- 
