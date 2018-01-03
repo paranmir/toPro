@@ -196,7 +196,24 @@ with the `auto`, we can let the compiler figure out the type
 - want to deduced type to have a top-level `const` : 
 		const auto f = ci; 	//deduced type of ci is int;
 
--   
+-----
+
+- want a reference to the `auto`-deduced type : 
+		auto &g = ci;	// g is a const int& that is bound to ci
+		auto &h = 42; 	// err: cannot bind a plain reference to a literal
+		const auto &j = 42;	// can bind a const reference to a literal
+- Asking for a reference to an `auto`-deduced type, top-level `const`s in the initializer are not ignored. : `const`s are not top-level when we bind a reference to an initializer.
+
+
+#### attention:
+
+- a reference or pointer is part of a particular declarator, not part of the base type for the declarations
+
+		auto k = ci, &l = i; 	// k is int, l is int& 
+		auto &m = ci, *p = &ci;	// m is a const int& , p is a pointer to const int
+		auto &n = i, *p2 = &ci;	// err : type deduced from i is int, deduced from &ci is const int.
+
+
 ## 2.5.3. `decltype` Type Specifier
 
 # 2.6. Defining Data Structure
