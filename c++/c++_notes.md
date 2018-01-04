@@ -216,6 +216,38 @@ with the `auto`, we can let the compiler figure out the type
 
 ## 2.5.3. `decltype` Type Specifier
 
+- want the compiler deduces a type and *jsut* define, not initialize
+- `decltype` returns the type of its operand
+- compiler just analyze the expression, **not evaluate** the expression
+
+		decltype(f()) sum = x; 		//sum has type f returns
+
+- the compiler does not call `f`, but uses the type
+
+### top-level `const`, reference
+
+	const int ci = 0, &cj = ci;
+	decltype(ci) x = 0; 		// x has type const int
+	decltyp(cj) y = x;		// y has const int& and is bound to x
+	decltype(cj) z;			// err : z is a reference and must be initialized.
+
+- `cj` is a reference, `decltype(cj)` is a reference, too
+- it is worth nothing that `decltype` is the *only* context in which a variable defined as a reference  is not treated as a synonym for the object to which it refers.
+
+### decltype and reference
+
+when applying `decltype` to an expression that is not a var
+-> get that type.
+- will see in chapter.4.1.1, some expressions will cause `decltype` yield , returns a reference type for expressions.
+		//decltype of an expression can be a reference type
+		int i = 42, *p = &i, &r = i;
+		decltype(r + 0) b;	// ok : addition yields an int. b is int
+		decltype(*p) c;		//err : c is int& and must be initialized
+
+- r is a reference, but `+` yields int. this can be used to get the type to which r refers.
+
+- the dereference operator is an example of an expression for which `decltype` returns a reference.  
+
 # 2.6. Defining Data Structure
 
 ## 2.6.1. `Sales_data` type
