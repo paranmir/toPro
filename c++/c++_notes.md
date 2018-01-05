@@ -248,9 +248,38 @@ when applying `decltype` to an expression that is not a var
 
 - the dereference operator is an example of an expression for which `decltype` returns a reference.  
 
+----
+
+### important diff between `decltype` and `auto`
+
+- deduction done by `decltype` depends on the form of input expression.
+
+- confusing : enclosing a variable in brackets affects the type returned by `decltype`
+
+- wrapping with brackets let the compiler to evaluate the operand as an expression -> a variabe is an expression : left side of an assignment 
+
+- result
+		// decltype of a parenthesized variable is always a reference
+		decltype ((i)) d; 	//err : d is int& and must be initialized.
+		decltype (i) e;		//ok : e is an (uninitialized)int
+
+
 # 2.6. Defining Data Structure
 
+- Data structure : a strategy to group together and using related data
+
+- IN C++ , define data tructure by defining a class.
+
 ## 2.6.1. `Sales_data` type
+
+- `Sales_item` needs operations ,but we cant support operations yet. -> define `Sales_struct` which is distinguished from `Sales_item`
+
+		struct Sales_data {
+			std::string bookNo;
+			unsigned units_sold = 0;
+			double revenue = 0.0;
+		};
+
 
 ## 2.6.2. Using `Sales_data` Class
 
